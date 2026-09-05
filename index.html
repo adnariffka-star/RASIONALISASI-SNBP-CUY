@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rasionalisasi SNBP Top 3 PTN - 100% Full Prodi</title>
+    <title>Rasionalisasi SNBP Top 3 PTN - Fitur Linearitas OSN</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -67,13 +67,14 @@
         .rekomendasi-list { list-style: none; }
         .rekomendasi-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 0.85rem; }
         .badge-mini { font-size: 0.75rem; padding: 2px 8px; border-radius: 8px; font-weight: 600; }
+        .info-linear { font-size: 0.8rem; font-style: italic; color: #666; margin-top: 4px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>🏝️ Rasionalisasi SNBP (100% Full)</h1>
-    <p class="subtitle">Database Lengkap UI, ITB, & UGM</p>
+    <p class="subtitle">Database UI, ITB, UGM + Analisis Linearitas OSN</p>
 
     <form id="snbpForm">
         <div class="form-group">
@@ -127,11 +128,19 @@
 
         <div id="sertifikatDetail" class="hidden">
             <div class="form-group">
-                <label>Jenis Prestasi</label>
+                <label>Jenis & Bidang Prestasi</label>
                 <select id="sertifikatJenis" onchange="updateTingkatMenu()">
-                    <option value="osn">OSN / Olimpiade Sains</option>
-                    <option value="univ">Lomba Tingkat Universitas</option>
-                    <option value="lain">Lomba Lainnya</option>
+                    <option value="osn_mat">OSN Matematika</option>
+                    <option value="osn_fis">OSN Fisika</option>
+                    <option value="osn_kim">OSN Kimia</option>
+                    <option value="osn_bio">OSN Biologi</option>
+                    <option value="osn_inf">OSN Informatika / Komputer</option>
+                    <option value="osn_ast">OSN Astronomi</option>
+                    <option value="osn_eko">OSN Ekonomi</option>
+                    <option value="osn_geo">OSN Geografi</option>
+                    <option value="osn_keb">OSN Kebumian</option>
+                    <option value="univ">Lomba Tingkat Universitas (Sains/Soshum)</option>
+                    <option value="lain">Lomba / Prestasi Lainnya</option>
                 </select>
             </div>
 
@@ -152,7 +161,7 @@
         <div style="font-size: 0.85rem; background: #f0f9ff; padding: 12px; border-radius: 10px; margin-bottom: 15px;">
             <div><strong>Rata-Rapor:</strong> <span id="resRapor"></span></div>
             <div><strong>Poin Alumni:</strong> +<span id="resAlumni"></span></div>
-            <div><strong>Poin Sertifikat:</strong> +<span id="resSertifikat"></span></div>
+            <div><strong>Poin Sertifikat:</strong> +<span id="resSertifikat"></span> <span id="resLinearInfo" class="info-linear"></span></div>
             <hr style="margin: 8px 0; border: none; border-top: 1px solid #d0e8f8;">
             <div><strong>TOTAL SKOR AKHIR:</strong> <span id="resTotal" style="font-size: 1.1rem; color: var(--coral-red); font-weight:700;"></span></div>
             <div><strong>Passing Grade Minimal:</strong> <span id="resCutoff"></span></div>
@@ -277,12 +286,35 @@ function updateTingkatMenu() {
     const tingkatSelect = document.getElementById("sertifikatTingkat");
     tingkatSelect.innerHTML = '';
 
-    if (jenis === 'osn') {
+    if (jenis.startsWith("osn_")) {
         tingkatSelect.innerHTML = `<option value="4.0">1. Nasional (Medalis)</option><option value="2.5">2. Provinsi</option><option value="1.5">3. Kabupaten / Kota</option>`;
     } else if (jenis === 'univ') {
         tingkatSelect.innerHTML = `<option value="3.0">1. Nasional</option><option value="2.0">2. Provinsi</option>`;
     } else {
         tingkatSelect.innerHTML = `<option value="1.5">1. Nasional</option><option value="1.0">2. Provinsi / Wilayah</option>`;
+    }
+}
+
+function cekLinearitas(jenisSertifikat, rumpunProdi) {
+    if (!jenisSertifikat.startsWith("osn_")) return { ratio: 1.0, status: "(Umum)" };
+
+    const mapLinear = {
+        "osn_mat": ["SAINS", "IT", "TEKNIK"],
+        "osn_fis": ["SAINS", "TEKNIK"],
+        "osn_kim": ["SAINS", "TEKNIK", "MEDIS"],
+        "osn_bio": ["MEDIS", "SAINS", "PERTANIAN"],
+        "osn_inf": ["IT", "TEKNIK"],
+        "osn_ast": ["SAINS", "TEKNIK"],
+        "osn_eko": ["EKONOMI", "PERTANIAN"],
+        "osn_geo": ["SAINS", "TEKNIK", "EKONOMI"],
+        "osn_keb": ["SAINS", "TEKNIK"]
+    };
+
+    const rumpunCocok = mapLinear[jenisSertifikat] || [];
+    if (rumpunCocok.includes(rumpunProdi)) {
+        return { ratio: 1.0, status: "✨ (Sangat Linear)" };
+    } else {
+        return { ratio: 0.5, status: "⚠️ (Kurang Linear - Poin Dipotong 50%)" };
     }
 }
 
@@ -295,18 +327,26 @@ document.getElementById("snbpForm").addEventListener("submit", function(e) {
     const prodiIdx = document.getElementById("prodi").value;
     const alumniPoin = parseFloat(document.getElementById("alumni").value);
 
+    const targetProdi = database[univ][prodiIdx];
+
     let sertifikatPoin = 0.0;
+    let linearInfo = "";
     if (document.getElementById("sertifikatAda").value === "ya") {
-        sertifikatPoin = parseFloat(document.getElementById("sertifikatTingkat").value);
+        const jenisSertif = document.getElementById("sertifikatJenis").value;
+        const rawPoin = parseFloat(document.getElementById("sertifikatTingkat").value);
+        const linearRes = cekLinearitas(jenisSertif, targetProdi.rumpun);
+        
+        sertifikatPoin = rawPoin * linearRes.ratio;
+        linearInfo = linearRes.status;
     }
 
-    const targetProdi = database[univ][prodiIdx];
     const totalSkor = rapor + alumniPoin + sertifikatPoin;
 
     document.getElementById("resNamaProdi").textContent = `${univ} - ${targetProdi.nama}`;
     document.getElementById("resRapor").textContent = rapor.toFixed(2);
     document.getElementById("resAlumni").textContent = alumniPoin.toFixed(2);
     document.getElementById("resSertifikat").textContent = sertifikatPoin.toFixed(2);
+    document.getElementById("resLinearInfo").textContent = linearInfo;
     document.getElementById("resTotal").textContent = totalSkor.toFixed(2);
     document.getElementById("resCutoff").textContent = targetProdi.cutoff.toFixed(2);
 
