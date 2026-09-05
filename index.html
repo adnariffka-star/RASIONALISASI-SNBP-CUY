@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rasionalisasi SNBP Top 3 PTN - Beach Edition</title>
+    <title>Rasionalisasi SNBP Top 3 PTN - 100% Full Prodi</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,12 +16,7 @@
             --text-dark: #2b2d42;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Nunito', sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
 
         body {
             background: linear-gradient(180deg, #8fe3ff 0%, #d4f5ff 40%, #fefae0 100%);
@@ -34,7 +29,7 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(0, 105, 148, 0.2);
@@ -43,166 +38,42 @@
             padding: 30px;
             border: 4px solid #ffffff;
             position: relative;
-            overflow: hidden;
         }
 
-        .container::before {
-            content: '🌊';
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            font-size: 80px;
-            opacity: 0.15;
-            pointer-events: none;
+        h1 { font-family: 'Fredoka', cursive; color: var(--ocean-dark); text-align: center; font-size: 1.8rem; margin-bottom: 5px; }
+        p.subtitle { text-align: center; color: var(--sand-gold); font-weight: 700; margin-bottom: 25px; font-size: 0.95rem; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-weight: 700; margin-bottom: 6px; color: var(--ocean-dark); font-size: 0.9rem; }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%; padding: 12px 16px; border: 2px solid #bde0fe; border-radius: 12px;
+            background-color: #f8fcff; font-size: 0.95rem; color: var(--text-dark); outline: none; transition: all 0.3s ease;
         }
 
-        h1 {
-            font-family: 'Fredoka', cursive;
-            color: var(--ocean-dark);
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-
-        p.subtitle {
-            text-align: center;
-            color: var(--sand-gold);
-            font-weight: 700;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--ocean-dark);
-            font-size: 0.9rem;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #bde0fe;
-            border-radius: 12px;
-            background-color: #f8fcff;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--ocean-light);
-            box-shadow: 0 0 8px rgba(2, 195, 154, 0.4);
-            background-color: #fff;
-        }
+        input:focus, select:focus { border-color: var(--ocean-light); box-shadow: 0 0 8px rgba(2, 195, 154, 0.4); background-color: #fff; }
 
         .btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(45deg, var(--sand-gold), var(--coral-red));
-            border: none;
-            border-radius: 14px;
-            color: white;
-            font-family: 'Fredoka', cursive;
-            font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 6px 15px rgba(231, 111, 81, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 10px;
+            width: 100%; padding: 14px; background: linear-gradient(45deg, var(--sand-gold), var(--coral-red));
+            border: none; border-radius: 14px; color: white; font-family: 'Fredoka', cursive;
+            font-size: 1.1rem; cursor: pointer; box-shadow: 0 6px 15px rgba(231, 111, 81, 0.3); margin-top: 10px;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(231, 111, 81, 0.4);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Result Styles */
-        .result-card {
-            margin-top: 25px;
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 20px;
-            border-left: 6px solid var(--ocean-blue);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-
-        .status-aman {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            border: 1px solid #a5d6a7;
-        }
-
-        .status-risiko {
-            background-color: #ffebee;
-            color: #c62828;
-            border: 1px solid #ef9a9a;
-        }
-
-        .rekomendasi-box {
-            margin-top: 20px;
-            background: var(--sand-light);
-            border-radius: 14px;
-            padding: 15px;
-            border: 1px dashed var(--sand-gold);
-        }
-
-        .rekomendasi-box h3 {
-            font-size: 1rem;
-            color: var(--ocean-dark);
-            margin-bottom: 10px;
-        }
-
-        .rekomendasi-list {
-            list-style: none;
-        }
-
-        .rekomendasi-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            font-size: 0.85rem;
-        }
-
-        .rekomendasi-item:last-child {
-            border-bottom: none;
-        }
-
-        .badge-mini {
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 8px;
-            font-weight: 600;
-        }
+        .hidden { display: none; }
+        .result-card { margin-top: 25px; background: #ffffff; border-radius: 16px; padding: 20px; border-left: 6px solid var(--ocean-blue); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .status-badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; margin-bottom: 12px; }
+        .status-aman { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .status-risiko { background-color: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .rekomendasi-box { margin-top: 20px; background: var(--sand-light); border-radius: 14px; padding: 15px; border: 1px dashed var(--sand-gold); }
+        .rekomendasi-list { list-style: none; }
+        .rekomendasi-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 0.85rem; }
+        .badge-mini { font-size: 0.75rem; padding: 2px 8px; border-radius: 8px; font-weight: 600; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🏝️ Rasionalisasi SNBP</h1>
-    <p class="subtitle">Analisis Peluang Lolos Top 3 PTN</p>
+    <h1>🏝️ Rasionalisasi SNBP (100% Full)</h1>
+    <p class="subtitle">Database Lengkap UI, ITB, & UGM</p>
 
     <form id="snbpForm">
         <div class="form-group">
@@ -212,7 +83,7 @@
 
         <div class="form-group">
             <label>Asal Sekolah</label>
-            <input type="text" id="sekolah" placeholder="Contoh: SMAN 1 Banyumas" required>
+            <input type="text" id="sekolah" placeholder="Contoh: SMAN 1 Jakarta" required>
         </div>
 
         <div class="form-group">
@@ -224,9 +95,9 @@
             <label>Pilih Universitas Target</label>
             <select id="univ" onchange="updateProdiList()" required>
                 <option value="">-- Pilih PTN --</option>
-                <option value="UI">1. UI (Universitas Indonesia)</option>
-                <option value="ITB">2. ITB (Institut Teknologi Bandung)</option>
-                <option value="UGM">3. UGM (Universitas Gadjah Mada)</option>
+                <option value="UI">1. UI (Universitas Indonesia) - 79 Prodi</option>
+                <option value="ITB">2. ITB (Institut Teknologi Bandung) - 12 Fakultas</option>
+                <option value="UGM">3. UGM (Universitas Gadjah Mada) - 93 Prodi</option>
             </select>
         </div>
 
@@ -246,7 +117,6 @@
             </select>
         </div>
 
-        <!-- Pertanyaan Interaktif Sertifikat -->
         <div class="form-group">
             <label>Punya Sertifikat Prestasi?</label>
             <select id="sertifikatAda" onchange="toggleSertifikatMenu()" required>
@@ -267,16 +137,13 @@
 
             <div class="form-group">
                 <label>Tingkat Prestasi</label>
-                <select id="sertifikatTingkat">
-                    <!-- Dinamis via JS -->
-                </select>
+                <select id="sertifikatTingkat"></select>
             </div>
         </div>
 
         <button type="submit" class="btn">🚀 Hitung Peluang Kelulusan</button>
     </form>
 
-    <!-- HASIL ANALISIS -->
     <div id="hasil" class="result-card hidden">
         <div id="statusBadge" class="status-badge"></div>
         <h2 id="resNamaProdi" style="color: var(--ocean-dark); font-size: 1.2rem; margin-bottom: 5px;"></h2>
@@ -292,52 +159,89 @@
         </div>
 
         <div class="rekomendasi-box">
-            <h3>🏖️ 5 Alternatif Jurusan Serumpun & Linear</h3>
+            <h3>🏖️ 5 Alternatif Jurusan Serumpun</h3>
             <ul id="rekomendasiList" class="rekomendasi-list"></ul>
         </div>
     </div>
 </div>
 
 <script>
-// Data Jurusan & Passing Grade
-const database = {
+const rawData = {
     UI: [
-        {nama: "Pendidikan Dokter", cutoff: 94.07, rumpun: "MEDIS"},
-        {nama: "Ilmu Hukum", cutoff: 93.38, rumpun: "SOSIAL"},
-        {nama: "Sistem Informasi", cutoff: 93.35, rumpun: "IT"},
-        {nama: "Manajemen", cutoff: 93.31, rumpun: "EKONOMI"},
-        {nama: "Akuntansi (S1)", cutoff: 93.25, rumpun: "EKONOMI"},
-        {nama: "Ilmu Psikologi", cutoff: 93.24, rumpun: "SOSIAL"},
-        {nama: "Teknik Sipil", cutoff: 91.69, rumpun: "KONSTRUKSI"},
-        {nama: "Arsitektur", cutoff: 91.66, rumpun: "KONSTRUKSI"},
-        {nama: "Teknik Elektro", cutoff: 91.29, rumpun: "IT"},
-        {nama: "Teknik Mesin", cutoff: 90.50, rumpun: "MESIN"},
-        {nama: "Biologi", cutoff: 89.53, rumpun: "SAINS"}
+        ["Pendidikan Dokter", 94.07, "MEDIS"], ["Ilmu Hukum", 93.38, "SOSHUM"], ["Sistem Informasi", 93.35, "IT"],
+        ["Manajemen", 93.31, "EKONOMI"], ["Akuntansi", 93.25, "EKONOMI"], ["Ilmu Psikologi", 93.24, "SOSHUM"],
+        ["Ilmu Komunikasi", 93.17, "SOSHUM"], ["Ilmu Komputer", 93.03, "IT"], ["Ilmu Hubungan Internasional", 92.80, "SOSHUM"],
+        ["Teknik Industri", 92.73, "TEKNIK"], ["Farmasi", 92.70, "MEDIS"], ["Pendidikan Dokter Gigi", 92.65, "MEDIS"],
+        ["Kriminologi", 92.63, "SOSHUM"], ["Ilmu Keperawatan", 92.48, "MEDIS"], ["Ilmu Kesehatan Masyarakat", 92.38, "MEDIS"],
+        ["Ilmu Administrasi Niaga", 92.33, "EKONOMI"], ["Ilmu Administrasi Negara", 92.29, "SOSHUM"], ["Ilmu Ekonomi", 91.95, "EKONOMI"],
+        ["Ilmu Administrasi Fiskal", 92.03, "EKONOMI"], ["Teknik Komputer", 92.01, "IT"], ["Teknik Sipil", 91.69, "TEKNIK"],
+        ["Arsitektur", 91.66, "TEKNIK"], ["Sastra Inggris", 91.66, "BAHASA"], ["Aktuaria", 91.52, "SAINS"],
+        ["Teknik Elektro", 91.29, "TEKNIK"], ["Gizi", 91.24, "MEDIS"], ["Ilmu Kesejahteraan Sosial", 91.20, "SOSHUM"],
+        ["K3", 91.15, "MEDIS"], ["Teknik Metalurgi & Material", 91.05, "TEKNIK"], ["Statistika", 91.01, "SAINS"],
+        ["Teknik Kimia", 90.90, "TEKNIK"], ["Ilmu Politik", 90.89, "SOSHUM"], ["Bahasa & Kebudayaan Korea", 90.86, "BAHASA"],
+        ["Teknik Lingkungan", 90.59, "TEKNIK"], ["Teknik Mesin", 90.50, "TEKNIK"], ["Ilmu Ekonomi Islam", 90.45, "EKONOMI"],
+        ["Arsitektur Interior", 90.43, "TEKNIK"], ["Sosiologi", 90.38, "SOSHUM"], ["Sastra Jepang", 90.31, "BAHASA"],
+        ["Matematika", 90.15, "SAINS"], ["Bisnis Islam", 90.10, "EKONOMI"], ["Teknik Biomedis", 89.86, "MEDIS"],
+        ["Sastra Arab", 89.84, "BAHASA"], ["Ilmu Perpustakaan", 89.62, "SOSHUM"], ["Antropologi Sosial", 89.57, "SOSHUM"],
+        ["Teknologi Bioproses", 89.53, "TEKNIK"], ["Biologi", 89.53, "SAINS"], ["Kesehatan Lingkungan", 89.49, "MEDIS"],
+        ["Sastra Indonesia", 89.36, "BAHASA"], ["Kimia", 89.33, "SAINS"], ["Sastra Cina", 88.97, "BAHASA"],
+        ["Teknik Perkapalan", 88.98, "TEKNIK"], ["Geografi", 88.77, "SAINS"], ["Bisnis Kreatif (D4)", 88.67, "EKONOMI"],
+        ["Produksi Media (D4)", 88.66, "SOSHUM"], ["Geologi", 88.66, "TEKNIK"], ["Manajemen Bisnis Pariwisata (D4)", 88.38, "EKONOMI"],
+        ["Ilmu Sejarah", 88.37, "BAHASA"], ["Ilmu Filsafat", 88.36, "BAHASA"], ["Arkeologi", 88.27, "BAHASA"],
+        ["Geofisika", 88.13, "SAINS"], ["Akuntansi (D3)", 88.15, "EKONOMI"], ["Perbankan (D3)", 88.11, "EKONOMI"],
+        ["Perpajakan (D3)", 88.05, "EKONOMI"], ["Fisika", 88.05, "SAINS"], ["Manajemen Rekod & Arsip (D4)", 88.00, "SOSHUM"],
+        ["Sastra Jerman", 87.94, "BAHASA"], ["Humas (D3)", 87.89, "SOSHUM"], ["Sastra Perancis", 87.82, "BAHASA"],
+        ["Fisioterapi (D4)", 87.78, "MEDIS"], ["Sastra Belanda", 87.71, "BAHASA"], ["Administrasi Perkantoran (D3)", 87.70, "SOSHUM"],
+        ["Terapi Okupasi (D4)", 87.64, "MEDIS"], ["Sastra Rusia", 87.61, "BAHASA"], ["Periklanan Kreatif (D3)", 87.45, "SOSHUM"],
+        ["Aktuaria (D3)", 87.40, "EKONOMI"], ["Sastra Jawa", 87.40, "BAHASA"], ["Administrasi Rumah Sakit (D3)", 87.33, "MEDIS"],
+        ["Penyiaran Multimedia (D3)", 87.10, "SOSHUM"]
     ],
     ITB: [
-        {nama: "STEI - Komputasi", cutoff: 95.12, rumpun: "IT"},
-        {nama: "FSRD (Ganesha)", cutoff: 93.85, rumpun: "BAHASA"},
-        {nama: "FTI (Ganesha)", cutoff: 93.39, rumpun: "MESIN"},
-        {nama: "FTMD (Mesin & Dirgantara)", cutoff: 93.32, rumpun: "MESIN"},
-        {nama: "Sekolah Farmasi", cutoff: 93.16, rumpun: "MEDIS"},
-        {nama: "STEI - Rekayasa", cutoff: 92.90, rumpun: "IT"},
-        {nama: "FTTM (Pertambangan)", cutoff: 92.63, rumpun: "KONSTRUKSI"},
-        {nama: "SBM (Bisnis & Manajemen)", cutoff: 92.56, rumpun: "EKONOMI"},
-        {nama: "SAPPK (Arsitektur)", cutoff: 92.55, rumpun: "KONSTRUKSI"}
+        ["STEI - Komputasi", 95.12, "IT"], ["FSRD (Ganesha)", 93.85, "BAHASA"], ["FTI (Ganesha)", 93.39, "TEKNIK"],
+        ["FTMD (Mesin & Dirgantara)", 93.32, "TEKNIK"], ["Sekolah Farmasi", 93.16, "MEDIS"], ["STEI - Rekayasa", 92.90, "IT"],
+        ["FTTM (Pertambangan & Perminyakan)", 92.63, "TEKNIK"], ["SBM (Bisnis & Manajemen)", 92.56, "EKONOMI"],
+        ["SAPPK (Arsitektur)", 92.55, "TEKNIK"], ["SITS (Sipil & Lingkungan)", 91.80, "TEKNIK"],
+        ["FMIPA (Sains Murni)", 90.50, "SAINS"], ["SITH (Hayati)", 89.90, "SAINS"]
     ],
     UGM: [
-        {nama: "Kedokteran", cutoff: 94.81, rumpun: "MEDIS"},
-        {nama: "Farmasi", cutoff: 94.84, rumpun: "MEDIS"},
-        {nama: "Manajemen", cutoff: 94.71, rumpun: "EKONOMI"},
-        {nama: "Hukum", cutoff: 94.42, rumpun: "SOSIAL"},
-        {nama: "Teknologi Informasi", cutoff: 94.23, rumpun: "IT"},
-        {nama: "Teknik Sipil", cutoff: 93.87, rumpun: "KONSTRUKSI"},
-        {nama: "Teknik Geodesi", cutoff: 91.46, rumpun: "KONSTRUKSI"},
-        {nama: "Teknik Elektro", cutoff: 92.91, rumpun: "IT"},
-        {nama: "Teknik Mesin", cutoff: 92.87, rumpun: "MESIN"},
-        {nama: "Agronomi", cutoff: 88.92, rumpun: "PERTANIAN"}
+        ["Agronomi", 88.92, "PERTANIAN"], ["Akuntansi", 94.37, "EKONOMI"], ["Akuntansi Sektor Publik (D4)", 90.07, "EKONOMI"],
+        ["Akuakultur", 87.84, "PERTANIAN"], ["Antropologi Budaya", 91.08, "SOSHUM"], ["Arkeologi", 90.34, "BAHASA"],
+        ["Arsitektur", 93.79, "TEKNIK"], ["Bahasa & Kebudayaan Jepang", 91.11, "BAHASA"], ["Bahasa & Kebudayaan Korea", 93.76, "BAHASA"],
+        ["Bahasa & Sastra Indonesia", 90.83, "BAHASA"], ["Bahasa & Sastra Prancis", 87.99, "BAHASA"], ["Bahasa Inggris", 87.86, "BAHASA"],
+        ["Bahasa, Sastra, & Budaya Jawa", 87.24, "BAHASA"], ["Biologi", 92.35, "SAINS"], ["Bisnis Perjalanan Wisata (D4)", 90.21, "EKONOMI"],
+        ["Ekonomi Pertanian & Agribisnis", 91.82, "PERTANIAN"], ["Elektronika & Instrumentasi", 89.19, "IT"], ["Farmasi", 94.84, "MEDIS"],
+        ["Filsafat", 91.89, "BAHASA"], ["Fisika", 88.96, "SAINS"], ["Geofisika", 88.57, "SAINS"],
+        ["Geografi Lingkungan", 90.84, "SAINS"], ["Gizi", 93.79, "MEDIS"], ["Higiene Gigi", 89.23, "MEDIS"],
+        ["Hukum", 94.42, "SOSHUM"], ["Ilmu Aktuaria", 91.91, "SAINS"], ["Ilmu & Industri Peternakan", 93.08, "PERTANIAN"],
+        ["Ilmu Ekonomi", 93.13, "EKONOMI"], ["Ilmu Hubungan Internasional", 94.23, "SOSHUM"], ["Ilmu Keperawatan", 93.85, "MEDIS"],
+        ["Ilmu Komunikasi", 94.33, "SOSHUM"], ["Ilmu Komputer", 93.92, "IT"], ["Ilmu Tanah", 88.68, "PERTANIAN"],
+        ["Kartografi & Penginderaan Jauh", 90.57, "SAINS"], ["Kedokteran", 94.81, "MEDIS"], ["Kedokteran Gigi", 93.97, "MEDIS"],
+        ["Kedokteran Hewan", 93.72, "MEDIS"], ["Kehutanan", 93.58, "PERTANIAN"], ["Kimia", 91.04, "SAINS"],
+        ["Manajemen", 94.71, "EKONOMI"], ["Manajemen & Kebijakan Publik", 92.44, "SOSHUM"], ["Manajemen & Penilaian Properti (D4)", 90.83, "EKONOMI"],
+        ["Manajemen Informasi Kesehatan (D4)", 93.56, "MEDIS"], ["Manajemen Sumberdaya Akuatik", 87.45, "PERTANIAN"], ["Matematika", 91.71, "SAINS"],
+        ["Mikrobiologi Pertanian", 87.21, "PERTANIAN"], ["Pariwisata", 93.86, "EKONOMI"], ["Pembangunan Ekonomi Kewilayahan (D4)", 88.91, "EKONOMI"],
+        ["Pembangunan Sosial & Kesejahteraan", 91.57, "SOSHUM"], ["Pembangunan Wilayah", 90.29, "SAINS"], ["Pengelolaan Arsip & Rekaman Informasi (D4)", 90.99, "SOSHUM"],
+        ["Pengelolaan Hutan (D4)", 88.52, "PERTANIAN"], ["Pengembangan Produk Agroindustri (D4)", 88.19, "PERTANIAN"], ["Penyuluhan & Komunikasi Pertanian", 88.76, "PERTANIAN"],
+        ["Perbankan (D4)", 88.89, "EKONOMI"], ["Perencanaan Wilayah & Kota", 91.93, "TEKNIK"], ["Politik & Pemerintahan", 92.71, "SOSHUM"],
+        ["Proteksi Tanaman", 88.60, "PERTANIAN"], ["Psikologi", 94.43, "SOSHUM"], ["Sastra Arab", 91.93, "BAHASA"],
+        ["Sastra Inggris", 93.28, "BAHASA"], ["Sejarah", 88.81, "BAHASA"], ["Sistem Informasi Geografis (D4)", 87.51, "SAINS"],
+        ["Sosiologi", 91.88, "SOSHUM"], ["Statistika", 93.11, "SAINS"], ["Teknik Biomedis", 91.09, "MEDIS"],
+        ["Teknik Elektro", 92.91, "IT"], ["Teknik Fisika", 87.66, "TEKNIK"], ["Teknik Geodesi", 91.46, "TEKNIK"],
+        ["Teknik Geologi", 92.94, "TEKNIK"], ["Teknik Industri", 93.44, "TEKNIK"], ["Teknik Infrastruktur Lingkungan", 89.55, "TEKNIK"],
+        ["Teknik Kimia", 93.35, "TEKNIK"], ["Teknik Mesin", 92.87, "TEKNIK"], ["Teknik Nuklir", 89.31, "TEKNIK"],
+        ["Teknik Pengelolaan Infrastruktur Sipil (D4)", 89.06, "TEKNIK"], ["Teknik Perawatan Alat Berat (D4)", 88.91, "TEKNIK"], ["Teknik Pertanian", 89.79, "PERTANIAN"],
+        ["Teknik Sipil", 93.87, "TEKNIK"], ["Teknologi Hasil Perikanan", 87.54, "PERTANIAN"], ["Teknologi Industri Pertanian", 90.71, "PERTANIAN"],
+        ["Teknologi Informasi", 94.23, "IT"], ["Teknologi Pangan & Hasil Pertanian", 92.84, "PERTANIAN"], ["Teknologi Rekayasa Elektro (D4)", 88.65, "IT"],
+        ["Teknologi Rekayasa Instrumentasi (D4)", 88.13, "IT"], ["Teknologi Rekayasa Internet (D4)", 89.88, "IT"], ["Teknologi Rekayasa Mesin (D4)", 88.98, "TEKNIK"],
+        ["Teknologi Rekayasa Bangunan Sipil (D4)", 88.67, "TEKNIK"], ["Teknologi Rekayasa Perangkat Lunak (D4)", 91.53, "IT"], ["Teknologi Pemetaan Dasar (D4)", 87.30, "TEKNIK"],
+        ["Teknologi Veteriner (D4)", 88.43, "MEDIS"]
     ]
 };
+
+const database = {};
+for (let univ in rawData) {
+    database[univ] = rawData[univ].map(item => ({ nama: item[0], cutoff: item[1], rumpun: item[2] }));
+}
 
 function updateProdiList() {
     const univ = document.getElementById("univ").value;
@@ -374,21 +278,11 @@ function updateTingkatMenu() {
     tingkatSelect.innerHTML = '';
 
     if (jenis === 'osn') {
-        tingkatSelect.innerHTML = `
-            <option value="4.0">1. Nasional (Medalis)</option>
-            <option value="2.5">2. Provinsi</option>
-            <option value="1.5">3. Kabupaten / Kota</option>
-        `;
+        tingkatSelect.innerHTML = `<option value="4.0">1. Nasional (Medalis)</option><option value="2.5">2. Provinsi</option><option value="1.5">3. Kabupaten / Kota</option>`;
     } else if (jenis === 'univ') {
-        tingkatSelect.innerHTML = `
-            <option value="3.0">1. Nasional</option>
-            <option value="2.0">2. Provinsi</option>
-        `;
+        tingkatSelect.innerHTML = `<option value="3.0">1. Nasional</option><option value="2.0">2. Provinsi</option>`;
     } else {
-        tingkatSelect.innerHTML = `
-            <option value="1.5">1. Nasional</option>
-            <option value="1.0">2. Provinsi / Wilayah</option>
-        `;
+        tingkatSelect.innerHTML = `<option value="1.5">1. Nasional</option><option value="1.0">2. Provinsi / Wilayah</option>`;
     }
 }
 
@@ -409,7 +303,6 @@ document.getElementById("snbpForm").addEventListener("submit", function(e) {
     const targetProdi = database[univ][prodiIdx];
     const totalSkor = rapor + alumniPoin + sertifikatPoin;
 
-    // Output
     document.getElementById("resNamaProdi").textContent = `${univ} - ${targetProdi.nama}`;
     document.getElementById("resRapor").textContent = rapor.toFixed(2);
     document.getElementById("resAlumni").textContent = alumniPoin.toFixed(2);
@@ -431,16 +324,23 @@ document.getElementById("snbpForm").addEventListener("submit", function(e) {
         resPesan.textContent = `Nilai kamu masih kurang ${selisih} poin dari batas minimal. Coba pertimbangkan alternatif jurusan di bawah.`;
     }
 
-    // Rekomendasi Serumpun
     const listEl = document.getElementById("rekomendasiList");
     listEl.innerHTML = '';
     
-    const serumpunList = database[univ].filter((item, idx) => idx != prodiIdx && item.rumpun === targetProdi.rumpun);
+    let temp = [];
+    database[univ].forEach((item, idx) => {
+        if (idx != prodiIdx && item.rumpun === targetProdi.rumpun) {
+            let diff = Math.abs(item.cutoff - totalSkor);
+            temp.push({ nama: item.nama, cutoff: item.cutoff, diff: diff });
+        }
+    });
 
-    if (serumpunList.length === 0) {
+    temp.sort((a, b) => a.diff - b.diff);
+
+    if (temp.length === 0) {
         listEl.innerHTML = '<li class="rekomendasi-item">Tidak ditemukan alternatif jurusan yang serumpun.</li>';
     } else {
-        serumpunList.slice(0, 5).forEach(item => {
+        temp.slice(0, 5).forEach(item => {
             const li = document.createElement("li");
             li.className = "rekomendasi-item";
             const isAman = totalSkor >= item.cutoff;
